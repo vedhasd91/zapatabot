@@ -1,7 +1,6 @@
 # zapatabot
 This is an active repository for Project ZapataBot.
-Team Lead: Ben Rhoades
-Members: Disha Shrivastava, Pallavi Avle, Chinmay Admane, Vedhas Deshpande, Vinit Katariya
+Team Lead: Ben Rhoades Members: Disha Shrivastava, Pallavi Avle, Chinmay Admane, Vedhas Deshpande, Vinit Katariya
 ==========================================================================================
 ==========================================================================================
 Language: Python
