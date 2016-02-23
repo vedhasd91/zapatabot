@@ -2,43 +2,45 @@
 import time
 import threading
 
-eflag=0
+#MasterNode python script: Includes modules, networkhandler, gps handler, class handler, optimal algorithm
+#Authors: MasterNode/Network Handler: Vedhas Deshpande
+#GPS handler: Pallavi Avle
+#Classhandler: Chinmay Admane
+#Optimal Algorithm: Ben Rhoades
+#Git Repo: https://github.com/vedhasd91/zapatabot.git
 
-#Threading class to invoke networkhandler
-class networkThread (threading.Thread):
-    def __init__(self, threadID, name, counter):
-        threading.Thread.__init__(self)
-        self.threadID = threadID
-        self.name = name
-        self.counter = counter
-    def run(self):
-        print "Starting " + self.name
-        networkhandler(self.name, self.counter, 5)
-        print "Exiting " + self.name
-
-def networkhandler(param, delay,counter):
-	print "In network handler"
+#---ZigBee Target Thread Function---
+def networkhandler(name, delay, counter):
 	while counter:
-		if eflag:
-			param.exit()
+		#To-DO ZigBee stuff
 		time.sleep(delay)
-	print "%s %s "%(param, time.ctime(time.time()))
-	counter-=1
+		print "%s %s "%(name, time.ctime(time.time()))
+		counter-=1
 	return 0
 
-def gpshandler(param, delay):
-	print "In gps handler"
+def gpshandler(name, delay, counter):
+	while counter:
+		#To-Do GPS stuff
+		time.sleep(delay)
+		print "%s %s "%(name, time.ctime(time.time()))
+		counter-=1
 	return 0
 
 def classhandler():
+	#To Do classification stuff here
 	return 0
 
 if __name__ == "__main__":
-	print "============================"
-	print "		MASTER NODE        "
-	print "============================"
-	thread1=networkThread(1,"NThread",1)
-	thread2=networkThread(2,"GThread",2)
+	print ">>>>>>>>>>MASTER NODE<<<<<<<<<<"
+	thread1 = threading.Thread(target=networkhandler,args=("ZigBee Thread",1,10))
 	thread1.start()
+	thread2 = threading.Thread(target=gpshandler,args=("GPS Thread",2,10))
 	thread2.start()
-	print "goodbye"
+	while 1:
+		#Infrastructure Software control prompt
+		uinput=raw_input(">>")
+		if uinput=='exit':
+			break
+	thread1.join()
+	thread2.join()
+	print "goodbye... shutting down masternode.."
