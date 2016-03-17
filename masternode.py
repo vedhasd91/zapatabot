@@ -1,7 +1,7 @@
 #! /usr/bin/python
 import time
 import threading
-from xbee import XBee
+from xbee import ZigBee
 from serial import Serial
 
 #MasterNode python script: Includes modules, networkhandler, gps handler, class handler, optimal algorithm
@@ -15,9 +15,12 @@ from serial import Serial
 PORT='/dev/ttyUSB0'
 BAUD=9600
 
-ser=Serial(PORT,BAUD)
-xb = XBee(ser)
+def msg_pack(data):
+        print data['rf_data']
 
+ser=Serial(PORT,BAUD)
+
+zb = ZigBee(ser,callback=msg_pack)
 
 #---ZigBee Target Thread Function---
 def networkhandler(name, delay, counter):
@@ -25,7 +28,7 @@ def networkhandler(name, delay, counter):
 		#To-DO ZigBee stuff
 		time.sleep(delay)
 		#print "%s %s "%(name, time.ctime(time.time()))
-		xb.tx(dest_addr='\x00\x01',data=name)
+		zb.tx(dest_addr_long='\x00\x13\xA2\x00\x40\xE3\x74\x70',dest_addr='\xF6\x81',data=name)
 		counter-=1
 	return 0
 
@@ -56,4 +59,5 @@ if __name__ == "__main__":
 			thread1.start()
 	thread1.join()
 	#thread2.join()
+	ser.close()
 	print "goodbye... shutting down masternode.."
