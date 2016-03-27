@@ -15,8 +15,13 @@ from serial import Serial
 PORT='/dev/ttyUSB0'
 BAUD=9600
 
+NetworkInfo = {}
+
+DeviceList = list()
+
 def msg_pack(data):
-        print data['rf_data']
+        print data
+	return 0
 
 ser=Serial(PORT,BAUD)
 
@@ -57,7 +62,13 @@ if __name__ == "__main__":
 			break
 		if uinput=='zigbee':
 			thread1.start()
+		if uinput=='zigbee -p':
+			print "Getting network info.."
+			zb.at(command='ND')
+		
+
 	thread1.join()
+	pingthread.join()
 	#thread2.join()
 	ser.close()
 	print "goodbye... shutting down masternode.."
