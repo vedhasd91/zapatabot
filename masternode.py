@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/python
 import time
 import threading
 from xbee import ZigBee
@@ -20,7 +20,9 @@ NetworkInfo = {}
 DeviceList = list()
 
 def msg_pack(data):
-        print data
+        DeviceList.append(data['parameter']['source_addr_long'])
+	print "device added to list...."
+	print DeviceList
 	return 0
 
 ser=Serial(PORT,BAUD)
@@ -33,7 +35,7 @@ def networkhandler(name, delay, counter):
 		#To-DO ZigBee stuff
 		time.sleep(delay)
 		#print "%s %s "%(name, time.ctime(time.time()))
-		zb.tx(dest_addr_long='\x00\x13\xA2\x00\x40\xE3\x74\x70',dest_addr='\xF6\x81',data=name)
+		zb.tx(dest_addr_long=DeviceList[0],dest_addr='\xFF\xFE',data=name)
 		counter-=1
 	return 0
 
@@ -65,10 +67,8 @@ if __name__ == "__main__":
 		if uinput=='zigbee -p':
 			print "Getting network info.."
 			zb.at(command='ND')
-		
-
-	thread1.join()
-	pingthread.join()
+	#thread1.join()
+	#pingthread.join()
 	#thread2.join()
 	ser.close()
 	print "goodbye... shutting down masternode.."
