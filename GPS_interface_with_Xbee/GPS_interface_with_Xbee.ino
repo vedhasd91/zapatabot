@@ -24,12 +24,12 @@ XBee xbee = XBee();
 XBeeResponse response =XBeeResponse();
 
 ZBRxResponse rx = ZBRxResponse();
-uint8_t payload[] = {'H','i'};
+char* payload = "Hi";
 
   // Specify the address of the remote XBee (this is the SH + SL)
   XBeeAddress64 addr64  = XBeeAddress64(0x00000000,0x00000000);
   // Create a TX Request
-  ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
+  
 void setup()
 {
   Serial.begin(115200);
@@ -37,8 +37,8 @@ void setup()
   zb.begin(ZbBaud);
   xbee.setSerial(zb);
   Serial.println();
-  Serial.println(F("Sats Latitude   Longitude    Alt    Distance     Checksum"));
-  Serial.println(F("      (deg)      (deg)       (m)  to Charlotte     Fail"));
+  Serial.println(F("Sats Latitude   Longitude     Alt    Distance   "));
+  Serial.println(F("      (deg)      (deg)        (m)    to Charlotte   "));
   Serial.println(F("---------------------------------------------------------------------------------------------------------------------------------------"));
 
 
@@ -48,22 +48,31 @@ void setup()
 }
 
 void loop()
-{/*
+{
   xbee.readPacket();
   
   if(xbee.getResponse().isAvailable()){
     xbee.getResponse().getZBRxResponse(rx);
     char* data = (char*)rx.getData();
+    char* cmd = "LOC";
     Serial.println(data);
+    if (strcmp(data,cmd)==0)
+     {
+      printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
+      ZBTxRequest zbTx = ZBTxRequest(addr64, (uint8_t*)payload, sizeof(payload));
+      xbee.send(zbTx);
+      data="";
+      
+     }
   }
-*/
-  
 
+  
+/*
   // Send your request
   xbee.send(zbTx);
   Serial.println("Sent..");
   delay(1000);
-  
+ */ 
 /*
   static const double CHARLOTTE_LAT = 35.3281765, CHARLOTTE_LON = -80.7821989;
 
@@ -75,8 +84,8 @@ void loop()
   Serial.print(",");
   printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
   Serial.print(",");
-
-  unsigned long distanceKmToClt =
+*/
+ /* unsigned long distanceKmToClt =
     (unsigned long)TinyGPSPlus::distanceBetween(
       gps.location.lat(),
       gps.location.lng(),
@@ -112,11 +121,14 @@ static void printFloat(float val, bool valid, int len, int prec)
   {
     while (len-- > 1)
       Serial.print('*');
-    Serial.print(' ');
+      char n = '*';
+      sprintf(payload,"%c",n);
+      Serial.print(' ');
   }
   else
   {
     Serial.print(val, prec);
+    sprintf(payload,"%f",val);
     int vi = abs((int)val);
     int flen = prec + (val < 0.0 ? 2 : 1); // . and -
     flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
