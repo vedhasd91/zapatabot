@@ -16,18 +16,26 @@ PORT='/dev/ttyUSB0'
 BAUD=9600
 
 NetworkInfo = {}
-
+accessList = threading.Lock()
 DeviceList = list()
 
 def msg_pack(data):
-        DeviceList.append(data['parameter']['source_addr_long'])
-	print "device added to list...."
-	print DeviceList
+	if "parameter" in data.keys():
+        	DeviceList.append(data['parameter']['source_addr_long'])
+		print "device added to list...."
+		print DeviceList
+	else:
+		print data['rf_data']
 	return 0
 
 ser=Serial(PORT,BAUD)
 
 zb = ZigBee(ser,callback=msg_pack)
+time.sleep(3)
+
+#---Zigbee Node ping----------
+print "Checking for device in the network..."
+zb.at(command="ND")
 
 #---ZigBee Target Thread Function---
 def networkhandler(name, delay, counter):
@@ -35,7 +43,8 @@ def networkhandler(name, delay, counter):
 		#To-DO ZigBee stuff
 		time.sleep(delay)
 		#print "%s %s "%(name, time.ctime(time.time()))
-		zb.tx(dest_addr_long=DeviceList[0],dest_addr='\xFF\xFE',data=name)
+		for device in DeviceList:
+			zb.tx(dest_addr_long=device,dest_addr='\xFF\xFE',data="LOC")
 		counter-=1
 	return 0
 
@@ -53,7 +62,7 @@ def classhandler():
 
 if __name__ == "__main__":
 	print ">>>>>>>>>>MASTER NODE<<<<<<<<<<"
-	thread1 = threading.Thread(target=networkhandler,args=("ZigBee Thread",1,10))
+	thread1 = threading.Thread(target=networkhandler,args=("ZigBee Thread",3,3))
 	#thread1.start()
 	thread2 = threading.Thread(target=gpshandler,args=("GPS Thread",2,10))
 	#thread2.start()
@@ -64,10 +73,7 @@ if __name__ == "__main__":
 			break
 		if uinput=='zigbee':
 			thread1.start()
-		if uinput=='zigbee -p':
-			print "Getting network info.."
-			zb.at(command='ND')
-	#thread1.join()
+	thread1.join()
 	#pingthread.join()
 	#thread2.join()
 	ser.close()
