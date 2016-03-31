@@ -19,32 +19,34 @@ NetworkInfo = {}
 accessList = threading.Lock()
 DeviceList = list()
 
+ser=Serial(PORT,BAUD)
+
 def msg_pack(data):
 	if "parameter" in data.keys():
         	DeviceList.append(data['parameter']['source_addr_long'])
 		print "device added to list...."
 		print DeviceList
-	else:
-		print data['rf_data']
+	elif data['id']=="rx":
+		rx_data = data['rf_data']
+		print rx_data
 	return 0
 
-ser=Serial(PORT,BAUD)
-
 zb = ZigBee(ser,callback=msg_pack)
-time.sleep(3)
 
 #---Zigbee Node ping----------
-print "Checking for device in the network..."
+print "Performing network reset...Wait for 10 secs"
+zb.at(command="NR",parameter="1")
+time.sleep(10)
+print "Acquiring Node addresses... wait for number of nodes to show up"
 zb.at(command="ND")
 
 #---ZigBee Target Thread Function---
 def networkhandler(name, delay, counter):
 	while counter:
-		#To-DO ZigBee stuff
-		time.sleep(delay)
 		#print "%s %s "%(name, time.ctime(time.time()))
 		for device in DeviceList:
 			zb.tx(dest_addr_long=device,dest_addr='\xFF\xFE',data="LOC")
+			time.sleep(1)
 		counter-=1
 	return 0
 
@@ -76,5 +78,11 @@ if __name__ == "__main__":
 	thread1.join()
 	#pingthread.join()
 	#thread2.join()
+	#zb.at(command="NR",parameter="1")
+	#print "Shutting down..resetting network"
+	#time.sleep(10)
+	#zb.at(command="FR")
+	#print "Performing software reset of co-ordinator"
+	#time.sleep(5)
 	ser.close()
 	print "goodbye... shutting down masternode.."
