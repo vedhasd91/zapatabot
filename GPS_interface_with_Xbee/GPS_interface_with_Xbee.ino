@@ -24,7 +24,7 @@ XBee xbee = XBee();
 XBeeResponse response =XBeeResponse();
 
 ZBRxResponse rx = ZBRxResponse();
-char* payload = "Hi";
+char* payload = "";
 
   // Specify the address of the remote XBee (this is the SH + SL)
   XBeeAddress64 addr64  = XBeeAddress64(0x00000000,0x00000000);
@@ -56,15 +56,15 @@ void loop()
     char* data = (char*)rx.getData();
     char* cmd = "LOC";
     Serial.println(data);
-    if (strcmp(data,cmd)==0)
-     {
-      printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
-      ZBTxRequest zbTx = ZBTxRequest(addr64, (uint8_t*)payload, sizeof(payload));
-      xbee.send(zbTx);
-      data="";
-      
-     }
-  }
+   if(strcmp(data,cmd)==0)
+   {
+     //printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
+     payload = "RCVD";
+     ZBTxRequest zbTx = ZBTxRequest(addr64, (uint8_t*)payload, sizeof(payload));
+     xbee.send(zbTx);
+   }
+   data="";
+}
 
   
 /*
@@ -119,16 +119,18 @@ static void printFloat(float val, bool valid, int len, int prec)
 {
   if (!valid)
   {
-    while (len-- > 1)
+   // while (len-- > 1)
       Serial.print('*');
       char n = '*';
-      sprintf(payload,"%c",n);
+      payload = &n;
+      //sprintf(payload,"%c",n);
       Serial.print(' ');
   }
   else
   {
     Serial.print(val, prec);
-    sprintf(payload,"%f",val);
+    //sprintf(payload,"%f",val);
+    dtostrf(val,7, 3, payload);
     int vi = abs((int)val);
     int flen = prec + (val < 0.0 ? 2 : 1); // . and -
     flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
