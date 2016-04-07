@@ -1,6 +1,6 @@
+#include <TinyGPS++.h>
 #include <Printers.h>
 #include <XBee.h>
-#include <TinyGPS++.h>
 #include <SoftwareSerial.h>
 
 #define BUFFER 80 
@@ -13,13 +13,10 @@ static const int RXPin = 2, TXPin = 3;
 static const int RXPin1 = 6, TXPin1 = 5;
 static const uint32_t GPSBaud = 4800;
 static const uint32_t ZbBaud = 9600;
-
 char cmd[] = "LOC";
-
-
 // The TinyGPS++ object
 TinyGPSPlus gps;
-
+//buffer for xbee frame
 uint8_t payload[BUFFER] = {0};
 // The serial connection to the GPS device
 SoftwareSerial ss(RXPin, TXPin);
@@ -32,10 +29,8 @@ XBee xbee = XBee();
 XBeeResponse response =XBeeResponse();
 
 ZBRxResponse rx = ZBRxResponse();
-
 // Specify the address of the remote XBee (this is the SH + SL)
 XBeeAddress64 addr64  = XBeeAddress64(0x00000000,0x00000000);
-int count = 5;
   
 void setup()
 {
@@ -50,72 +45,49 @@ void setup()
 }
 
 void loop()
-{
+{  
+  zb.listen();
   xbee.readPacket();
- 
   if(xbee.getResponse().isAvailable()){
-    
+    //Very very IMP to check for identifier
     if(xbee.getResponse().getApiId()==ZB_RX_RESPONSE){
-      
-    xbee.getResponse().getZBRxResponse(rx);
-    
-    data = (char*)rx.getData();
-    
-    String rx = String(data);
-    
-    Serial.println(rx + " received");
-    
-    if(isSameAs(data,cmd)==0){
-     //printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
-     charToBuf(reply,payload);
-     
-     ZBTxRequest zbTx = ZBTxRequest(addr64,payload, sizeof(payload));
-     
-     xbee.send(zbTx);
-     
-     delay(500);
-     
-     data = "";
+      xbee.getResponse().getZBRxResponse(rx);
+      data = (char*)rx.getData();
+      String rx = String(data);
+      Serial.println(rx + " received");
+      if(isSameAs(data,cmd)==0){
+        ss.listen();
+        smartDelay(500);
+        printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
+        charToBuf(reply,payload);
+        ZBTxRequest zbTx = ZBTxRequest(addr64,payload, sizeof(payload));
+        xbee.send(zbTx);
+        data = "";
+      }
     }
-    
- delay(10);
-    }
-}
-
-  
-/*
-  // Send your request
-  xbee.send(zbTx);
-  Serial.println("Sent..");
-  delay(1000);
- */ 
-/*
+  }
+  /*
   static const double CHARLOTTE_LAT = 35.3281765, CHARLOTTE_LON = -80.7821989;
-
   printInt(gps.satellites.value(), gps.satellites.isValid(), 5);
-   Serial.print(",");
+  Serial.print(",");
   printFloat(gps.location.lat(), gps.location.isValid(), 11, 6);
   Serial.print(",");
   printFloat(gps.location.lng(), gps.location.isValid(), 12, 6);
   Serial.print(",");
   printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
   Serial.print(",");
-*/
- /* unsigned long distanceKmToClt =
+  /* unsigned long distanceKmToClt =
     (unsigned long)TinyGPSPlus::distanceBetween(
       gps.location.lat(),
       gps.location.lng(),
       CHARLOTTE_LAT, 
       CHARLOTTE_LON) / 1000;
   printInt(distanceKmToClt, gps.location.isValid(), 9);
-
+  */
   Serial.println();
   
-  smartDelay(1000);
-
   if (millis() > 5000 && gps.charsProcessed() < 10)
     Serial.println(F("No GPS data received: check wiring"));
-    */
 }
 
 //*****************************************************************************************
@@ -133,20 +105,18 @@ static void smartDelay(unsigned long ms)
 
 static void printFloat(float val, bool valid, int len, int prec)
 {
-  if (!valid)
+  if(!valid)
   {
-   // while (len-- > 1)
+    while (len-- > 1)
       Serial.print('*');
-      char n = '*';
-      //payload = &n;
-      //sprintf(payload,"%c",n);
-      Serial.print(' ');
+    reply[0] = '*';
+    reply[1]='\0';
+    Serial.print(' ');
   }
   else
   {
     Serial.print(val, prec);
-    //sprintf(payload,"%f",val);
-    //dtostrf(val,7, 3, payload);
+    dtostrf(val,7, 2, reply);
     int vi = abs((int)val);
     int flen = prec + (val < 0.0 ? 2 : 1); // . and -
     flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
@@ -155,6 +125,29 @@ static void printFloat(float val, bool valid, int len, int prec)
   }
   smartDelay(0);
 }
+
+/*
+static void printFloat(float val, bool valid, int len, int prec)
+{
+  if (!valid)
+  {
+    while (len-- > 1)
+      Serial.print('*');
+    Serial.print(' ');
+  }
+  else
+  {
+    Serial.print(val, prec);
+    int vi = abs((int)val);
+    int flen = prec + (val < 0.0 ? 2 : 1); // . and -
+    flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
+    for (int i=flen; i<len; ++i)
+      Serial.print(' ');
+  }
+  smartDelay(0);
+}
+
+*/
 
 static void printInt(unsigned long val, bool valid, int len)
 {
