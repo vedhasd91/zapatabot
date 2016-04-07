@@ -2,6 +2,8 @@
 #include <XBee.h>
 #include <TinyGPS++.h>
 #include <SoftwareSerial.h>
+
+#define BUFFER 80 
 /*
    This sample code demonstrates the normal use of a TinyGPS++ (TinyGPSPlus) object.
    It requires the use of SoftwareSerial, and assumes that you have a
@@ -12,23 +14,28 @@ static const int RXPin1 = 6, TXPin1 = 5;
 static const uint32_t GPSBaud = 4800;
 static const uint32_t ZbBaud = 9600;
 
+char cmd[] = "LOC";
+
 
 // The TinyGPS++ object
 TinyGPSPlus gps;
 
+uint8_t payload[BUFFER] = {0};
 // The serial connection to the GPS device
 SoftwareSerial ss(RXPin, TXPin);
 SoftwareSerial zb(RXPin1, TXPin1);
+
+char reply[BUFFER] = "RCVD";
+char *data = "";
 
 XBee xbee = XBee();
 XBeeResponse response =XBeeResponse();
 
 ZBRxResponse rx = ZBRxResponse();
-char* payload = "";
 
-  // Specify the address of the remote XBee (this is the SH + SL)
-  XBeeAddress64 addr64  = XBeeAddress64(0x00000000,0x00000000);
-  // Create a TX Request
+// Specify the address of the remote XBee (this is the SH + SL)
+XBeeAddress64 addr64  = XBeeAddress64(0x00000000,0x00000000);
+int count = 5;
   
 void setup()
 {
@@ -39,31 +46,40 @@ void setup()
   Serial.println();
   Serial.println(F("Sats Latitude   Longitude     Alt    Distance   "));
   Serial.println(F("      (deg)      (deg)        (m)    to Charlotte   "));
-  Serial.println(F("---------------------------------------------------------------------------------------------------------------------------------------"));
-
-
-
-
-  
+  Serial.println(F("---------------------------------------------------------------------------------------------------------------------------------------"));  
 }
 
 void loop()
 {
   xbee.readPacket();
-  
+ 
   if(xbee.getResponse().isAvailable()){
+    
+    if(xbee.getResponse().getApiId()==ZB_RX_RESPONSE){
+      
     xbee.getResponse().getZBRxResponse(rx);
-    char* data = (char*)rx.getData();
-    char* cmd = "LOC";
-    Serial.println(data);
-   if(strcmp(data,cmd)==0)
-   {
+    
+    data = (char*)rx.getData();
+    
+    String rx = String(data);
+    
+    Serial.println(rx + " received");
+    
+    if(isSameAs(data,cmd)==0){
      //printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
-     payload = "RCVD";
-     ZBTxRequest zbTx = ZBTxRequest(addr64, (uint8_t*)payload, sizeof(payload));
+     charToBuf(reply,payload);
+     
+     ZBTxRequest zbTx = ZBTxRequest(addr64,payload, sizeof(payload));
+     
      xbee.send(zbTx);
-   }
-   data="";
+     
+     delay(500);
+     
+     data = "";
+    }
+    
+ delay(10);
+    }
 }
 
   
@@ -122,7 +138,7 @@ static void printFloat(float val, bool valid, int len, int prec)
    // while (len-- > 1)
       Serial.print('*');
       char n = '*';
-      payload = &n;
+      //payload = &n;
       //sprintf(payload,"%c",n);
       Serial.print(' ');
   }
@@ -130,7 +146,7 @@ static void printFloat(float val, bool valid, int len, int prec)
   {
     Serial.print(val, prec);
     //sprintf(payload,"%f",val);
-    dtostrf(val,7, 3, payload);
+    //dtostrf(val,7, 3, payload);
     int vi = abs((int)val);
     int flen = prec + (val < 0.0 ? 2 : 1); // . and -
     flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
@@ -189,3 +205,33 @@ static void printStr(const char *str, int len)
     Serial.print(i<slen ? str[i] : ' ');
   smartDelay(0);
 }
+
+static void charToBuf(char *str, uint8_t *payload){
+  
+  for(int i=0;i<BUFFER;i++){
+    payload[i]=0x00;
+  }
+  for(int i=0;i<(strlen(str));i++){
+    memcpy(&payload[i],&str[i],sizeof(str[i]));
+  }
+  
+}
+
+static int isSameAs(char *str1, char *str2){
+ int i = strlen(str1);
+ int j = strlen(str2);
+ int k = 0;
+ int l = 0;
+ 
+ while( i && j ){
+   if(!(str1[k++]==str2[l++]))
+     return 1;
+   i--;
+   j--;
+ }
+ 
+ return 0;
+ 
+}
+   
+  
