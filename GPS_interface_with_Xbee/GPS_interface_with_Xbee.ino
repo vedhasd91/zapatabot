@@ -22,7 +22,7 @@ uint8_t payload[BUFFER] = {0};
 SoftwareSerial ss(RXPin, TXPin);
 SoftwareSerial zb(RXPin1, TXPin1);
 
-char reply[BUFFER] = "RCVD";
+char reply[BUFFER] = "";
 char *data = "";
 
 XBee xbee = XBee();
@@ -58,11 +58,17 @@ void loop()
       if(isSameAs(data,cmd)==0){
         ss.listen();
         smartDelay(500);
+        printFloat(gps.location.lat(), gps.location.isValid(), 12, 6);
+        //delay(1);
+        printFloat(gps.location.lng(), gps.location.isValid(), 12, 6);
+        //delay(1);
         printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
+        //delay(1);
         charToBuf(reply,payload);
         ZBTxRequest zbTx = ZBTxRequest(addr64,payload, sizeof(payload));
         xbee.send(zbTx);
         data = "";
+        reply[0]='\0';
       }
     }
   }
@@ -105,6 +111,8 @@ static void smartDelay(unsigned long ms)
 
 static void printFloat(float val, bool valid, int len, int prec)
 {
+  char buf[50]={0};
+  char delim[2]=",";
   if(!valid)
   {
     while (len-- > 1)
@@ -116,12 +124,15 @@ static void printFloat(float val, bool valid, int len, int prec)
   else
   {
     Serial.print(val, prec);
-    dtostrf(val,7, 2, reply);
-    int vi = abs((int)val);
+    //sprintf(reply,"%f",val);
+    dtostrf(val,7, prec, buf);
+    strcat(buf,delim);
+    strcat(reply,buf);
+    /*int vi = abs((int)val);
     int flen = prec + (val < 0.0 ? 2 : 1); // . and -
     flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
     for (int i=flen; i<len; ++i)
-      Serial.print(' ');
+      Serial.print(' ');*/
   }
   smartDelay(0);
 }
