@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import time
 import threading
+import struct
 from xbee import ZigBee
 from serial import Serial
 
@@ -16,73 +17,66 @@ PORT='/dev/ttyUSB0'
 BAUD=9600
 
 NetworkInfo = {}
-accessList = threading.Lock()
 DeviceList = list()
+rx_data=""
+execFlag = 0
+nodecount = 0
+DEBUG = 0
 
 ser=Serial(PORT,BAUD)
 
 def msg_pack(data):
 	if "parameter" in data.keys():
-        	DeviceList.append(data['parameter']['source_addr_long'])
-		print "device added to list...."
-		print DeviceList
+		if data['parameter']['source_addr_long'] not in DeviceList:
+			DeviceList.append(data['parameter']['source_addr_long'])
+			print "device added to list...."
+			print DeviceList
 	elif data['id']=="rx":
 		rx_data = data['rf_data']
-		print rx_data
+		NetworkInfo[data['source_addr_long']].insert(2,rx_data)
+		print NetworkInfo[data['source_addr_long']][0] + " sent to co-ordinator: " + NetworkInfo[data['source_addr_long']][2]
+	elif DEBUG:
+		print data
 	return 0
 
 zb = ZigBee(ser,callback=msg_pack)
 
 #---Zigbee Node ping----------
-print "Performing network reset...Wait for 10 secs"
-zb.at(command="NR",parameter="1")
-time.sleep(10)
-print "Acquiring Node addresses... wait for number of nodes to show up"
+print "Acquiring Node addresses..."
 zb.at(command="ND")
 
 #---ZigBee Target Thread Function---
-def networkhandler(name, delay, counter):
-	while counter:
+def networkhandler(name, delay, cmd, nodecount):
+	while not execFlag:
 		#print "%s %s "%(name, time.ctime(time.time()))
 		for device in DeviceList:
-			zb.tx(dest_addr_long=device,dest_addr='\xFF\xFE',data="LOC")
-			time.sleep(1)
-		counter-=1
-	return 0
-
-def gpshandler(name, delay, counter):
-	while counter:
-		#To-Do GPS stuff
-		time.sleep(delay)
-		print "%s %s "%(name, time.ctime(time.time()))
-		counter-=1
-	return 0
-
-def classhandler():
-	#To Do classification stuff here
+			if str(device) not in NetworkInfo.keys():
+				NetworkInfo[str(device)] = ['RSU'+str(nodecount),device]
+				nodecount+=1
+				print NetworkInfo[device][0] + " is " + str([device])
+			else:	
+				zb.tx(dest_addr_long=NetworkInfo[device][1],dest_addr='\xFF\xFE',data=cmd)
+				time.sleep(3)
 	return 0
 
 if __name__ == "__main__":
 	print ">>>>>>>>>>MASTER NODE<<<<<<<<<<"
-	thread1 = threading.Thread(target=networkhandler,args=("ZigBee Thread",3,3))
-	#thread1.start()
-	thread2 = threading.Thread(target=gpshandler,args=("GPS Thread",2,10))
-	#thread2.start()
+	thread1 = threading.Thread(target=networkhandler,args=("ZTh",3,"LOC",nodecount))
 	while 1:
 		#Infrastructure Software control prompt
 		uinput=raw_input(">>")
 		if uinput=='exit':
+			execFlag = 1
 			break
-		if uinput=='zigbee':
+		if uinput=='zigbee init':
 			thread1.start()
-	thread1.join()
-	#pingthread.join()
-	#thread2.join()
-	#zb.at(command="NR",parameter="1")
-	#print "Shutting down..resetting network"
-	#time.sleep(10)
-	#zb.at(command="FR")
-	#print "Performing software reset of co-ordinator"
-	#time.sleep(5)
+		if uinput=='ls':
+			print NetworkInfo
+	if execFlag:
+		thread1.join()
 	ser.close()
 	print "goodbye... shutting down masternode.."
+
+
+
+

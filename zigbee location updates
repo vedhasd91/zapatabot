@@ -1,0 +1,79 @@
+>>zigbee init
+>>RSU0 is ['\x00\x13\xa2\x00@\xe3tn']
+RSU1 is ['\x00\x13\xa2\x00@\xf3\x182']
+RSU2 is ['\x00\x13\xa2\x00@\xf3\x18?']
+RSU3 is ['\x00\x13\xa2\x00@\xeanw']
+RSU4 is ['\x00\x13\xa2\x00@\xf3\x18C']
+
+RSU0 sent to co-ordinator: 35.308388,-80.742340, 199.80,
+RSU2 sent to co-ordinator: 35.308727,-80.742195, 213.80,
+RSU3 sent to co-ordinator: 35.308601,-80.742279, 197.00,
+RSU4 sent to co-ordinator: 35.308872,-80.742325, 206.20,
+
+RSU0 sent to co-ordinator: 35.308380,-80.742462, 203.70,
+RSU2 sent to co-ordinator: 35.308743,-80.742226, 218.50,
+RSU3 sent to co-ordinator: 35.308605,-80.742271, 197.80,
+RSU4 sent to co-ordinator: 35.308880,-80.742325, 204.50,
+
+RSU0 sent to co-ordinator: 35.308342,-80.742508, 206.50,
+RSU2 sent to co-ordinator: 35.308746,-80.742233, 220.00,
+RSU3 sent to co-ordinator: 35.308609,-80.742271, 199.20,
+RSU4 sent to co-ordinator: 35.308876,-80.742317, 204.50,
+
+RSU0 sent to co-ordinator: 35.308426,-80.742310, 200.10,
+RSU2 sent to co-ordinator: 35.308750,-80.742233, 220.30,
+RSU3 sent to co-ordinator: 35.308613,-80.742264, 200.50,
+RSU4 sent to co-ordinator: 35.308872,-80.742355, 208.90,
+
+RSU0 sent to co-ordinator: 35.308449,-80.742325, 199.10,
+RSU2 sent to co-ordinator: 35.308750,-80.742233, 220.30,
+RSU3 sent to co-ordinator: 35.308617,-80.742264, 201.80,
+RSU4 sent to co-ordinator: 35.308868,-80.742378, 212.40,
+
+RSU0 sent to co-ordinator: 35.308529,-80.742371, 193.80,
+RSU2 sent to co-ordinator: 35.308746,-80.742233, 220.40,
+RSU3 sent to co-ordinator: 35.308620,-80.742256, 203.00,
+RSU4 sent to co-ordinator: 35.308857,-80.742325, 202.90,
+
+RSU0 sent to co-ordinator: 35.308491,-80.742348, 190.70,
+RSU2 sent to co-ordinator: 35.308743,-80.742241, 220.00,
+RSU3 sent to co-ordinator: 35.308628,-80.742249, 203.90,
+RSU4 sent to co-ordinator: 35.308849,-80.742302, 198.40,
+
+RSU0 sent to co-ordinator: 35.308609,-80.742081, 190.30,
+RSU2 sent to co-ordinator: 35.308743,-80.742241, 218.90,
+RSU3 sent to co-ordinator: 35.308586,-80.742249, 195.60,
+RSU4 sent to co-ordinator: 35.308846,-80.742302, 200.00,
+
+RSU0 sent to co-ordinator: 35.308586,-80.742271, 203.30,
+RSU2 sent to co-ordinator: 35.308739,-80.742233, 217.30,
+RSU3 sent to co-ordinator: 35.308590,-80.742256, 192.10,
+RSU4 sent to co-ordinator: 35.308842,-80.742310, 200.80,
+
+RSU0 sent to co-ordinator: 35.308559,-80.742172, 208.50,
+RSU2 sent to co-ordinator: 35.308739,-80.742218, 214.30,
+RSU3 sent to co-ordinator: 35.308605,-80.742233, 194.30,
+RSU4 sent to co-ordinator: 35.308846,-80.742310, 200.80,
+
+RSU0 sent to co-ordinator: 35.308517,-80.742226, 185.30,
+RSU2 sent to co-ordinator: 35.308743,-80.742195, 211.80,
+RSU3 sent to co-ordinator: 35.308605,-80.742256, 194.30,
+RSU4 sent to co-ordinator: 35.308842,-80.742287, 200.80,
+
+RSU0 sent to co-ordinator: 35.308498,-80.742325, 185.30,
+RSU2 sent to co-ordinator: 35.308743,-80.742210, 213.40,
+RSU3 sent to co-ordinator: 35.308613,-80.742264, 194.60,
+RSU4 sent to co-ordinator: 35.308842,-80.742294, 200.80,
+
+RSU0 sent to co-ordinator: 35.308548,-80.742180, 185.30,
+RSU2 sent to co-ordinator: 35.308743,-80.742203, 212.70,
+RSU3 sent to co-ordinator: 35.308647,-80.742249, 194.60,
+RSU4 sent to co-ordinator: 35.308842,-80.742310, 200.80,
+
+RSU0 sent to co-ordinator: 35.308613,-80.742012, 185.30,
+exit
+RSU2 sent to co-ordinator: 35.308743,-80.742203, 212.70,
+RSU3 sent to co-ordinator: 35.308659,-80.742249, 194.60,
+exRSU4 sent to co-ordinator: 35.308846,-80.742325, 200.80,
+it
+goodbye... shutting down masternode..
