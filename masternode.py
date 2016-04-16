@@ -16,19 +16,24 @@ from serial import Serial
 PORT='/dev/ttyUSB0'
 BAUD=9600
 
+#---setup flags, variables and data structures
 NetworkInfo = {}
 DeviceList = list()
 rx_data=""
 execFlag = 0
 nodecount = 0
 DEBUG = 0
+accesslock = threading.Lock()
+
 
 ser=Serial(PORT,BAUD)
 
 def msg_pack(data):
 	if "parameter" in data.keys():
 		if data['parameter']['source_addr_long'] not in DeviceList:
+			accesslock.acquire()
 			DeviceList.append(data['parameter']['source_addr_long'])
+			accesslock.release()
 			print "device added to list...."
 			print DeviceList
 	elif data['id']=="rx":
