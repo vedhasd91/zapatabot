@@ -26,7 +26,6 @@ rx_data=""
 execFlag = 0
 nodecount = 0
 DEBUG = 0
-
 accesslock = threading.Lock()
 readwritelock = threading.Lock()
 
@@ -56,7 +55,11 @@ zb.at(command="ND")
 
 def plotwaypoints():
 	writehtml = open('plot_waypoints_gmaps.html','w')
-	message = """
+	for key in NetworkInfo.keys():
+		nodes.append([NetworkInfo[key][0],NetworkInfo[key][2]])
+	
+	for node in nodes
+		message = """
 <!DOCTYPE html>
 	<html> 
 	<head> 
@@ -69,12 +72,9 @@ def plotwaypoints():
   		<div id="map" style="width: 1300px; height: 700px;"></div>
 
   		<script type="text/javascript">
-    				var locations = [
-      				['RSU0', 35.308380,-80.742462, 1],
-      				['RSU2', 35.308739,-80.742218, 2],
-				['RSU3', 35.308605,-80.742233, 3],
-				['RSU4', 35.308846,-80.742310, 4],	  
-    				];
+    				var locations = [""" + 
+      				node
+				+ """];
 
     				var map = new google.maps.Map(document.getElementById('map'), {
       					zoom: 15,
