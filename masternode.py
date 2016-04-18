@@ -3,6 +3,8 @@ import time
 import threading
 import struct
 import webbrowser
+import SlopeDistance
+import CurveCalculator
 from xbee import ZigBee
 from serial import Serial
 
@@ -24,7 +26,10 @@ rx_data=""
 execFlag = 0
 nodecount = 0
 DEBUG = 0
+
 accesslock = threading.Lock()
+readwritelock = threading.Lock()
+
 ser=Serial(PORT,BAUD)
 
 def msg_pack(data):
@@ -110,18 +115,44 @@ def networkhandler(name, delay, cmd, nodecount):
 		#print "%s %s "%(name, time.ctime(time.time()))
 		for device in DeviceList:
 			if str(device) not in NetworkInfo.keys():
+				readwritelock.acquire()
 				NetworkInfo[str(device)] = ['RSU'+str(nodecount),device]
+				readwritelock.release()
 				nodecount+=1
 				print NetworkInfo[device][0] + " is " + str([device])
 			else:	
 				zb.tx(dest_addr_long=NetworkInfo[device][1],dest_addr='\xFF\xFE',data=cmd)
-				time.sleep(1)
-		time.sleep(1)
+				time.sleep(0.50)
+		time.sleep(delay)
+	return 0
+
+def gpshandler(name,delay):
+	prev_loc_attr = ['35','-80','200']
+	while not execFlag:
+		time.sleep(delay)
+		for key in NetworkInfo.keys():
+			readwritelock.acquire()
+			gpsdata = NetworkInfo[key][2]
+			#print "Slope Curve Dist thread:" + NetworkInfo[key][0] + gpsdata
+			readwritelock.release()
+			cur_loc_attr = gpsdata.split(',')
+			if cur_loc_attr[0][0].isdigit():
+				dist = SlopeDistance.CoordinatesToMeters(float(prev_loc_attr[0]),float(prev_loc_attr[1]),float(cur_loc_attr[0]),float(cur_loc_attr[1]))
+				slope = SlopeDistance.SlopeCalculator(float(prev_loc_attr[2]),float(cur_loc_attr[2]),dist)
+				category = SlopeDistance.SlopeCategory(slope)
+				angle = CurveCalculator.CoordinatesToAngle(float(prev_loc_attr[0]),float(prev_loc_attr[1]),float(cur_loc_attr[0]),float(cur_loc_attr[1]))
+				anglecat = CurveCalculator.CurveCat(angle)
+				print  NetworkInfo[key][0] + " "+ str(dist) + " " + str(slope) + " " + str(category) + " " + str(angle) + " " + str(anglecat)
+				prev_loc_attr=cur_loc_attr
+			else:
+				print NetworkInfo[key][0] + " is yet to be locked"
+			
 	return 0
 
 if __name__ == "__main__":
 	print ">>>>>>>>>>MASTER NODE<<<<<<<<<<"
-	thread1 = threading.Thread(target=networkhandler,args=("ZTh",3,"LOC",nodecount))
+	zig = threading.Thread(target=networkhandler,args=("ZTh",5,"LOC",nodecount))
+	gps = threading.Thread(target=gpshandler,args=("Gth",15))
 	while 1:
 		#Infrastructure Software control prompt
 		uinput=raw_input(">>")
@@ -129,13 +160,15 @@ if __name__ == "__main__":
 			execFlag = 1
 			break
 		if uinput=='zigbee init':
-			thread1.start()
+			zig.start()
+			gps.start()
 		if uinput=='ls':
 			print NetworkInfo
 		if uinput=='plot':
 			plotwaypoints()
 	if execFlag:
-		thread1.join()
+		zig.join()
+		gps.join()
 	ser.close()
 	print "goodbye... shutting down masternode.."
 

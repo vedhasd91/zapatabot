@@ -1,0 +1,447 @@
+
+************************SLOPE CURVE DISTANCE ANGLE TESTING DATA*******************************************
+
+pi@raspberrypi:~/scripts/zapatabot $ ./masternode.py 
+Acquiring Node addresses...
+>>>>>>>>>>MASTER NODE<<<<<<<<<<
+>>device added to list....
+['\x00\x13\xa2\x00@\xeanw']
+device added to list....
+['\x00\x13\xa2\x00@\xeanw', '\x00\x13\xa2\x00@\xf3\x18C']
+device added to list....
+['\x00\x13\xa2\x00@\xeanw', '\x00\x13\xa2\x00@\xf3\x18C', '\x00\x13\xa2\x00@\xe3tn']
+device added to list....
+['\x00\x13\xa2\x00@\xeanw', '\x00\x13\xa2\x00@\xf3\x18C', '\x00\x13\xa2\x00@\xe3tn', '\x00\x13\xa2\x00@\xf3\x18?']
+
+>>zigbee init
+RSU0 is ['\x00\x13\xa2\x00@\xeanw']
+RSU1 is ['\x00\x13\xa2\x00@\xf3\x18C']
+RSU2 is ['\x00\x13\xa2\x00@\xe3tn']
+RSU3 is ['\x00\x13\xa2\x00@\xf3\x18?']
+ >>RSU0 sent to co-ordinator: *
+RSU1 sent to co-ordinator: *
+RSU2 sent to co-ordinator: 35.308262,-80.742050, 213.10,
+RSU3 sent to co-ordinator: *
+RSU0 sent to co-ordinator: *
+RSU1 sent to co-ordinator: *
+RSU2 sent to co-ordinator: 35.308285,-80.741982, 213.10,
+RSU3 sent to co-ordinator: *
+slope is of type 1
+curve is of degree 3
+RSU2 75666.3828956 0.0173128405178 1 117.151887513 3
+RSU1 is yet to be locked
+RSU0 is yet to be locked
+RSU3 is yet to be locked
+RSU0 sent to co-ordinator: *
+RSU1 sent to co-ordinator: 35.308750,-80.742157, 180.20,
+RSU2 sent to co-ordinator: 35.308311,-80.741951, 213.10,
+RSU3 sent to co-ordinator: *
+RSU0 sent to co-ordinator: *
+RSU1 sent to co-ordinator: 35.308762,-80.742058, 202.00,
+RSU3 sent to co-ordinator: *
+RSU2 sent to co-ordinator: 35.308353,-80.741974, 213.10,
+slope is of type 1
+RSU2 7.5960219289 0.0 1 5.48394666438 0
+slope is of type 2
+curve is of degree 1
+RSU1 46.1130429029 24.8005051893 2 170.485691861 1
+RSU0 is yet to be locked
+RSU3 is yet to be locked
+RSU0 sent to co-ordinator: 35.308643,-80.742081, 250.50,
+RSU1 sent to co-ordinator: 35.308746,-80.742020, 220.10,
+RSU2 sent to co-ordinator: 35.308483,-80.741943, 213.10,
+RSU3 sent to co-ordinator: *
+RSU0 sent to co-ordinator: 35.308643,-80.742081, 250.50,
+RSU1 sent to co-ordinator: 35.308743,-80.742012, 228.80,
+RSU2 sent to co-ordinator: 35.308491,-80.741951, 213.10,
+RSU3 sent to co-ordinator: *
+slope is of type 2
+curve is of degree 1
+RSU2 31.6593906172 37.4370919547 2 162.140796374 1
+slope is of type 4
+curve is of degree 1
+RSU1 28.5625890807 65.7986597756 4 168.825891995 1
+RSU0 12.7610546642 123.638096676 0 29.3827693205 0
+RSU3 is yet to be locked
+RSU0 sent to co-ordinator: 35.308643,-80.742081, 250.50,
+RSU1 sent to co-ordinator: 35.308750,-80.742020, 224.00,
+RSU2 sent to co-ordinator: 35.308506,-80.741913, 213.10,
+RSU3 sent to co-ordinator: *
+RSU0 sent to co-ordinator: 35.308784,-80.742111, 195.40,
+RSU1 sent to co-ordinator: 35.308758,-80.741974, 218.80,
+RSU2 sent to co-ordinator: 35.308407,-80.741898, 213.10,
+RSU3 sent to co-ordinator: *
+curve is of degree 2
+RSU2 31.0545894914 179.448757339 0 147.67490047 2
+slope is of type 1
+curve is of degree 1
+RSU1 39.6340063854 14.5326641236 1 169.979583777 1
+curve is of degree 4
+RSU0 12.7631995104 119.310022338 0 103.092076312 4
+RSU3 is yet to be locked
+RSU0 sent to co-ordinator: 35.308823,-80.742096, 186.90,
+RSU1 sent to co-ordinator: 35.308792,-80.741959, 217.40,
+RSU2 sent to co-ordinator: 35.308342,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308605,-80.742279, 207.10,
+RSU0 sent to co-ordinator: 35.308849,-80.742088, 179.30,
+RSU1 sent to co-ordinator: 35.308807,-80.741974, 209.90,
+RSU2 sent to co-ordinator: 35.308342,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308609,-80.742271, 209.40,
+slope is of type 2
+curve is of degree 1
+RSU2 51.247720351 36.8028798257 2 163.542646991 1
+slope is of type 1
+curve is of degree 1
+RSU1 51.7477441393 6.19570195005 1 177.688584972 1
+curve is of degree 3
+RSU0 11.3497801832 107.680914501 0 114.297758723 3
+RSU3 31.4313185748 332.565649338 0 31.8914871802 0
+RSU0 sent to co-ordinator: 35.308865,-80.742081, 175.00,
+RSU1 sent to co-ordinator: 35.308826,-80.741997, 203.20,
+RSU2 sent to co-ordinator: 35.308342,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308617,-80.742256, 209.60,
+RSU0 sent to co-ordinator: 35.308872,-80.742088, 168.50,
+RSU1 sent to co-ordinator: 35.308853,-80.742020, 198.80,
+RSU2 sent to co-ordinator: 35.308342,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308620,-80.742249, 208.50,
+slope is of type 1
+curve is of degree 2
+RSU2 41.5281956486 8.94518402856 1 135.63597417 2
+slope is of type 2
+curve is of degree 1
+RSU1 57.1645250998 25.8369814372 2 173.711919087 1
+curve is of degree 4
+RSU0 6.52201789388 102.400325751 0 108.901026297 4
+RSU3 31.6008355968 163.110870293 0 27.5360005054 0
+RSU0 sent to co-ordinator: 35.308846,-80.742088, 178.70,
+RSU1 sent to co-ordinator: 35.308819,-80.742035, 194.00,
+RSU2 sent to co-ordinator: 35.308342,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308628,-80.742241, 206.80,
+RSU0 sent to co-ordinator: 35.308830,-80.742088, 185.10,
+RSU1 sent to co-ordinator: 35.308796,-80.742065, 188.20,
+RSU2 sent to co-ordinator: 35.308193,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308632,-80.742241, 205.50,
+RSU0 sent to co-ordinator: 35.308819,-80.742088, 190.70,
+RSU1 sent to co-ordinator: 35.308807,-80.742165, 177.80,
+slope is of type 1
+curve is of degree 2
+RSU2 54.6404366308 8.44866637887 1 150.337668123 2
+slope type is 3
+curve is of degree 1
+RSU1 70.981516105 57.3223762329 3 164.123144655 1
+curve is of degree 5
+RSU0 7.1132876711 119.871114934 0 79.1881537351 5
+slope is of type 4
+RSU3 25.0022768681 73.4444874958 4 33.7301664235 0
+ RSU2 sent to co-ordinator: 35.308193,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308636,-80.742241, 203.20,
+RSU0 sent to co-ordinator: 35.308811,-80.742096, 190.70,
+RSU1 sent to co-ordinator: 35.308834,-80.742218, 170.50,
+RSU2 sent to co-ordinator: 35.308193,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308643,-80.742241, 200.80,
+RSU0 sent to co-ordinator: 35.308804,-80.742104, 193.00,
+RSU1 sent to co-ordinator: 35.308807,-80.742210, 168.80,
+RSU2 sent to co-ordinator: 35.308193,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308651,-80.742233, 199.10,
+slope is of type 1
+curve is of degree 2
+RSU2 55.4557012069 13.8351722461 1 151.671780645 2
+slope is of type 4
+curve is of degree 1
+RSU1 72.2054993555 77.6936659892 4 161.005057478 1
+curve is of degree 4
+RSU0 9.62427412945 108.989843099 0 91.9862832255 4
+slope is of type 2
+RSU3 20.6508036347 30.9184652754 2 34.5296338586 0
+RSU0 sent to co-ordinator: 35.308796,-80.742104, 195.70,
+RSU1 sent to co-ordinator: 35.308765,-80.742180, 170.30,
+RSU2 sent to co-ordinator: 35.308193,-80.741951, 213.10,
+RSU3 sent to co-ordinator: 35.308655,-80.742233, 198.10,
+RSU0 sent to co-ordinator: 35.308788,-80.742104, 197.10,
+RSU1 sent to co-ordinator: 35.308792,-80.742172, 172.10,
+RSU2 sent to co-ordinator: 35.308395,-80.742065, 215.00,
+RSU3 sent to co-ordinator: 35.308659,-80.742233, 197.80,
+slope type is 3
+curve is of degree 2
+RSU2 32.2908798841 56.5735670509 3 151.829393595 2
+curve is of degree 1
+RSU1 45.199518574 301.406118133 0 167.595716993 1
+curve is of degree 4
+RSU0 6.18636388429 103.209878731 0 94.1229202172 4
+slope is of type 1
+curve is of degree 6
+RSU3 18.5141578967 3.78359561677 1 39.2161883118 6
+RSU0 sent to co-ordinator: 35.308777,-80.742111, 198.80,
+RSU1 sent to co-ordinator: 35.308777,-80.742149, 174.80,
+RSU2 sent to co-ordinator: 35.308395,-80.742065, 215.00,
+RSU3 sent to co-ordinator: 35.308659,-80.742226, 197.80,
+RSU0 sent to co-ordinator: 35.308762,-80.742111, 204.90,
+RSU1 sent to co-ordinator: 35.308811,-80.742157, 177.40,
+RSU2 sent to co-ordinator: 35.308395,-80.742065, 215.00,
+RSU3 sent to co-ordinator: 35.308659,-80.742226, 198.00,
+slope is of type 4
+curve is of degree 2
+RSU2 33.0777332577 60.8760340564 4 152.556848732 2
+curve is of degree 1
+RSU1 47.0043599968 133.298987278 0 169.769817045 1
+curve is of degree 2
+RSU0 6.86363723984 103.26818739 0 142.544738412 2
+slope type is 3
+curve is of degree 6
+RSU3 15.4940540498 49.7374699007 3 42.3374198821 6
+RSU0 sent to co-ordinator: 35.308750,-80.742119, 209.70,
+RSU1 sent to co-ordinator: 35.308826,-80.742157, 177.40,
+RSU2 sent to co-ordinator: 35.308395,-80.742065, 215.00,
+RSU3 sent to co-ordinator: 35.308662,-80.742226, 198.20,
+RSU0 sent to co-ordinator: 35.308739,-80.742126, 213.60,
+RSU1 sent to co-ordinator: 35.308826,-80.742149, 177.40,
+RSU2 sent to co-ordinator: 35.308395,-80.742065, 215.00,
+RSU3 sent to co-ordinator: 35.308662,-80.742226, 198.20,
+slope is of type 4
+curve is of degree 2
+RSU2 32.7898426977 60.6302895852 4 153.541901211 2
+curve is of degree 1
+RSU1 48.5273647557 122.563045863 0 170.963124185 1
+curve is of degree 1
+RSU0 9.89652346584 103.960391814 0 167.825752915 1
+curve is of degree 6
+RSU3 12.4758394967 170.571370846 0 46.6631039932 6
+RSU0 sent to co-ordinator: 35.308739,-80.742142, 212.50,
+RSU1 sent to co-ordinator: 35.308880,-80.742149, 177.40,
+RSU2 sent to co-ordinator: 35.308773,-80.741615, 143.90,
+RSU3 sent to co-ordinator: 35.308662,-80.742226, 198.20,
+RSU0 sent to co-ordinator: 35.308746,-80.742157, 205.60,
+RSU1 sent to co-ordinator: 35.309139,-80.742188, 177.40,
+RSU2 sent to co-ordinator: 35.308773,-80.741615, 143.90,
+RSU3 sent to co-ordinator: 35.308662,-80.742226, 198.20,
+curve is of degree 5
+RSU2 56.7997448041 325.833296111 0 77.4492710414 5
+slope type is 3
+curve is of degree 3
+RSU1 66.0278017137 58.8769418655 3 128.051465394 3
+curve is of degree 1
+RSU0 43.7900475963 84.176169202 0 176.316934425 1
+RSU3 11.2447308455 87.4018629495 0 33.8350191098 0
+RSU0 sent to co-ordinator: 35.308769,-80.742157, 196.60,
+RSU1 sent to co-ordinator: 35.309395,-80.742241, 177.40,
+RSU2 sent to co-ordinator: 35.308773,-80.741615, 143.90,
+RSU3 sent to co-ordinator: 35.308666,-80.742226, 198.20,
+RSU0 sent to co-ordinator: 35.308792,-80.742149, 188.20,
+RSU1 sent to co-ordinator: 35.309120,-80.742180, 177.40,
+RSU2 sent to co-ordinator: 35.308773,-80.741615, 175.60,
+RSU3 sent to co-ordinator: 35.308666,-80.742226, 198.20,
+slope type is 3
+curve is of degree 5
+RSU2 56.7997448041 43.3698033711 3 77.4492710414 5
+slope is of type 1
+curve is of degree 3
+RSU1 64.1654995149 2.80635026342 1 126.965374353 3
+slope is of type 2
+curve is of degree 1
+RSU0 36.5802514681 30.9016379657 2 175.589703852 1
+RSU3 15.6561270655 83.0127636161 0 26.5053146006 0
+RSU0 sent to co-ordinator: 35.308804,-80.742142, 185.80,
+RSU1 sent to co-ordinator: 35.308933,-80.742126, 177.40,
+RSU2 sent to co-ordinator: 35.308617,-80.741837, 195.50,
+RSU3 sent to co-ordinator: 35.308670,-80.742226, 198.20,
+RSU0 sent to co-ordinator: 35.308792,-80.742134, 193.30,
+RSU1 sent to co-ordinator: 35.308975,-80.742149, 177.40,
+RSU2 sent to co-ordinator: 35.308628,-80.741821, 196.50,
+RSU3 sent to co-ordinator: 35.308674,-80.742218, 198.20,
+RSU0 sent to co-ordinator: 35.308777,-80.742134, 200.20,
+slope is of type 1
+curve is of degree 4
+RSU2 36.9920829052 4.60043841381 1 96.5587882429 4
+slope type is 3
+curve is of degree 2
+RSU1 48.7299028942 42.6047141187 3 142.354720882 2
+curve is of degree 1
+RSU0 22.0586283812 395.361042943 0 176.462368414 1
+slope is of type 1
+RSU3 13.757581179 14.693532777 1 33.6444312894 0
+RSU1 sent to co-ordinator: 35.308922,-80.742119, 177.40,
+RSU2 sent to co-ordinator: 35.308678,-80.741730, 187.50,
+RSU3 sent to co-ordinator: 35.308674,-80.742218, 198.20,
+RSU0 sent to co-ordinator: 35.308765,-80.742142, 200.20,
+RSU1 sent to co-ordinator: 35.308884,-80.742111, 177.40,
+RSU2 sent to co-ordinator: 35.308750,-80.741600, 173.30,
+RSU3 sent to co-ordinator: 35.308678,-80.742218, 198.20,
+RSU0 sent to co-ordinator: 35.308754,-80.742149, 200.20,
+RSU1 sent to co-ordinator: 35.308834,-80.742104, 177.40,
+RSU2 sent to co-ordinator: 35.308811,-80.741463, 161.90,
+RSU3 sent to co-ordinator: 35.308674,-80.742218, 198.20,
+slope is of type 4
+curve is of degree 5
+RSU2 70.182369995 60.4339360039 4 77.4634378557 5
+slope is of type 2
+curve is of degree 4
+RSU1 58.2208364014 27.6195563205 2 92.5178434426 4
+RSU0 9.78800879772 110.722033682 0 24.6564373489 0
+slope is of type 1
+RSU3 10.8780960469 18.7044200166 1 35.1395451844 0
+RSU0 sent to co-ordinator: 35.308746,-80.742149, 200.20,
+RSU1 sent to co-ordinator: 35.308788,-80.742088, 177.40,
+RSU2 sent to co-ordinator: 35.308899,-80.741310, 143.80,
+RSU3 sent to co-ordinator: 35.308655,-80.742210, 198.20,
+RSU0 sent to co-ordinator: 35.308739,-80.742157, 200.20,
+RSU1 sent to co-ordinator: 35.308754,-80.742073, 177.40,
+RSU2 sent to co-ordinator: 35.308968,-80.741180, 129.90,
+RSU3 sent to co-ordinator: 35.308617,-80.742203, 198.20,
+curve is of degree 5
+RSU2 99.7006254514 94.0364239108 0 70.8586568906 5
+slope is of type 4
+curve is of degree 5
+RSU1 84.4528907492 68.0236522913 4 73.634793581 5
+curve is of degree 5
+RSU0 7.80256348493 106.425923427 0 77.6568745962 5
+slope is of type 1
+RSU3 14.1934233359 14.2330454067 1 17.1026741144 0
+RSU0 sent to co-ordinator: 35.308735,-80.742157, 200.20,
+RSU1 sent to co-ordinator: 35.308796,-80.742088, 177.40,
+RSU2 sent to co-ordinator: 35.309021,-80.741096, 121.50,
+RSU3 sent to co-ordinator: 35.308590,-80.742203, 198.20,
+RSU0 sent to co-ordinator: 35.308731,-80.742165, 200.20,
+RSU1 sent to co-ordinator: 35.308823,-80.742096, 177.40,
+RSU2 sent to co-ordinator: 35.309002,-80.741119, 126.00,
+RSU3 sent to co-ordinator: 35.308578,-80.742203, 198.20,
+curve is of degree 5
+RSU2 107.274958627 90.9990132189 0 66.4797337773 5
+slope is of type 4
+curve is of degree 5
+RSU1 90.8602152721 68.6027718003 4 77.3464197384 5
+RSU0 11.9938672631 117.58403164 0 31.4681859191 0
+slope is of type 1
+RSU3 17.3587406074 11.5988155599 1 11.4574675731 0
+RSU0 sent to co-ordinator: 35.308731,-80.742172, 200.20,
+RSU1 sent to co-ordinator: 35.308853,-80.742111, 177.40,
+RSU2 sent to co-ordinator: 35.308910,-80.741241, 138.90,
+RSU3 sent to co-ordinator: 35.308575,-80.742210, 198.20,
+RSU0 sent to co-ordinator: 35.308727,-80.742172, 200.20,
+RSU1 sent to co-ordinator: 35.308838,-80.742104, 177.40,
+RSU2 sent to co-ordinator: 35.308819,-80.741447, 154.00,
+RSU3 sent to co-ordinator: 35.308575,-80.742210, 198.20,
+slope is of type 4
+curve is of degree 5
+RSU2 73.6483356498 75.0291740104 4 68.6620940555 5
+slope type is 3
+curve is of degree 4
+RSU1 59.6539041459 42.6440496357 3 92.0298025343 4
+RSU0 13.7990565183 125.619159908 0 26.5614914526 0
+slope is of type 1
+RSU3 17.249775692 11.6730791737 1 11.5308335039 0
+RSU0 sent to co-ordinator: 35.308723,-80.742180, 200.20,
+RSU1 sent to co-ordinator: 35.308842,-80.742104, 177.40,
+RSU2 sent to co-ordinator: 35.308777,-80.741562, 167.10,
+RSU3 sent to co-ordinator: 35.308578,-80.742218, 198.20,
+RSU0 sent to co-ordinator: 35.308720,-80.742180, 200.20,
+RSU1 sent to co-ordinator: 35.308815,-80.742081, 177.40,
+RSU2 sent to co-ordinator: 35.308781,-80.741623, 166.40,
+RSU3 sent to co-ordinator: 35.308586,-80.742226, 198.20,
+slope is of type 4
+curve is of degree 5
+RSU2 57.9812493757 65.5902239852 4 66.730025447 5
+slope is of type 2
+curve is of degree 4
+RSU1 41.730752422 27.3258766806 2 95.1980116239 4
+curve is of degree 6
+RSU0 13.8667879867 125.977966164 0 40.3781710634 6
+slope is of type 1
+RSU3 15.4737339491 13.034463264 1 15.6495210228 0
+RSU0 sent to co-ordinator: 35.308716,-80.742180, 200.20,
+RSU1 sent to co-ordinator: 35.308815,-80.742081, 177.40,
+RSU2 sent to co-ordinator: 35.308754,-80.741722, 171.40,
+RSU3 sent to co-ordinator: 35.308594,-80.742226, 198.20,
+RSU0 sent to co-ordinator: 35.308762,-80.742157, 208.50,
+RSU1 sent to co-ordinator: 35.308815,-80.742081, 177.40,
+RSU2 sent to co-ordinator: 35.308723,-80.741760, 184.60,
+RSU3 sent to co-ordinator: 35.308594,-80.742226, 198.20,
+slope is of type 2
+curve is of degree 5
+RSU2 44.9455135189 31.7471251482 2 70.187731654 5
+slope is of type 2
+curve is of degree 3
+RSU1 30.8719115977 23.9835512496 2 109.351861631 3
+curve is of degree 6
+RSU0 9.07138382182 104.546231991 0 49.4839176357 6
+slope is of type 4
+RSU3 19.7020746954 61.3267192452 4 18.5292873526 0
+RSU0 sent to co-ordinator: 35.308781,-80.742142, 205.40,
+RSU1 sent to co-ordinator: 35.308815,-80.742081, 177.40,
+RSU2 sent to co-ordinator: 35.308708,-80.741768, 186.10,
+RSU3 sent to co-ordinator: 35.308594,-80.742226, 198.20,
+RSU0 sent to co-ordinator: 35.308788,-80.742126, 204.40,
+RSU1 sent to co-ordinator: 35.308815,-80.742081, 177.40,
+RSU2 sent to co-ordinator: 35.308689,-80.741837, 184.20,
+RSU3 sent to co-ordinator: 35.308594,-80.742226, 198.20,
+RSU0 sent to co-ordinator: 35.308807,-80.742104, 204.40,
+RSU1 sent to co-ordinator: 35.308708,-80.742027, 191.70,
+slope type is 3
+curve is of degree 5
+RSU2 36.8448797028 41.0780657651 3 73.3392472505 5
+slope type is 3
+curve is of degree 4
+RSU1 17.3696792731 47.871237141 3 96.9863368525 4
+curve is of degree 2
+RSU0 13.0384464822 430.296242427 0 147.596522745 2
+slope is of type 2
+RSU3 26.1440085138 24.4111670529 2 25.0518368886 0
+
+RSU2 sent to co-ordinator: 35.308670,-80.741898, 184.90,
+RSU3 sent to co-ordinator: 35.308594,-80.742226, 198.20,
+RSU0 sent to co-ordinator: 35.308811,-80.742104, 204.10,
+RSU1 sent to co-ordinator: 35.308708,-80.742027, 191.70,
+RSU2 sent to co-ordinator: 35.308655,-80.741928, 188.90,
+RSU3 sent to co-ordinator: 35.308617,-80.742233, 195.90,
+
+RSU0 sent to co-ordinator: 35.308804,-80.742111, 203.60,
+RSU1 sent to co-ordinator: 35.308708,-80.742027, 191.70,
+RSU2 sent to co-ordinator: 35.308632,-80.741982, 195.10,
+RSU3 sent to co-ordinator: 35.308617,-80.742233, 195.90,
+
+slope is of type 1
+curve is of degree 5
+RSU2 22.5403198536 13.8850763289 1 79.1953427824 5
+slope is of type 2
+curve is of degree 2
+RSU1 9.38561861777 38.8654341446 2 154.210756381 2
+curve is of degree 2
+RSU0 13.1166882209 215.696154082 0 144.471551619 2
+slope is of type 2
+RSU3 23.5567465727 34.5869126267 2 28.0306974977 0
+
+RSU0 sent to co-ordinator: 35.308800,-80.742111, 203.60,
+RSU1 sent to co-ordinator: 35.308708,-80.742027, 191.70,
+RSU2 sent to co-ordinator: 35.308617,-80.741997, 198.50,
+RSU3 sent to co-ordinator: 35.308617,-80.742233, 195.90,
+
+RSU0 sent to co-ordinator: 35.308796,-80.742119, 204.00,
+RSU1 sent to co-ordinator: 35.308708,-80.742027, 191.70,
+RSU2 sent to co-ordinator: 35.308598,-80.741974, 194.20,
+RSU3 sent to co-ordinator: 35.308617,-80.742233, 195.90,
+slope is of type 1
+curve is of degree 4
+RSU2 23.5966126339 7.22319381942 1 95.1367351277 4
+slope is of type 1
+curve is of degree 1
+RSU1 13.1429487689 19.3753569125 1 158.535864772 1
+curve is of degree 2
+RSU0 12.8623677554 326.978466733 0 139.531123753 2
+slope is of type 2
+RSU3 22.431497885 38.7226589542 2 27.4617830212 0
+
+exiRSU0 sent to co-ordinator: 35.308788,-80.742119, 204.30,
+t
+RSU1 sent to co-ordinator: 35.308773,-80.742035, 205.50,
+RSU2 sent to co-ordinator: 35.308598,-80.741936, 189.10,
+RSU3 sent to co-ordinator: 35.308617,-80.742233, 195.90,
+slope is of type 2
+curve is of degree 4
+RSU2 27.0326737881 25.9904687528 2 94.4823626624 4
+curve is of degree 2
+RSU1 21.4326177966 118.853965697 0 155.219566325 2
+slope is of type 1
+curve is of degree 4
+RSU0 7.80256035443 15.5647459095 1 102.343178986 4
+slope type is 3
+RSU3 21.6460628095 42.1058167145 3 28.5476918272 0
+goodbye... shutting down masternode..
