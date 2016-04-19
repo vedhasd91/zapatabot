@@ -51,23 +51,23 @@ def SlopeCalculator (altitude1, altitude2, distance):
 
 def SlopeCategory(slope_val):
 	if(0.0000000000 <= slope_val <= 20.0000000000):
-		print "slope is of type 1"
+		#print "slope is of type 1"
 		return 1
 
 	if(20.0000000000 < slope_val <= 40.0000000000):
-		print "slope is of type 2"
+		#print "slope is of type 2"
 		return 2
 
 	if(40.0000000000 < slope_val <= 60.0000000000):
-		print "slope type is 3"
+		#print "slope type is 3"
 		return 3
 
 	if(60.0000000000 < slope_val <= 80.0000000000):
-		print "slope is of type 4"
+		#print "slope is of type 4"
 		return 4
 
 	if(80.0000000000 < slope_val <= 10.0000000000):
-		print "slope is of type 5"
+		#print "slope is of type 5"
 		return 5
 	
 	return 0

@@ -75,27 +75,27 @@ def CoordinatesToMeters (latitude1, longitude1, latitude2, longitude2):
 
 def CurveCat(angle):
 	if (38.0000000000 <= angle <= 62.0000000000):
-    		print "curve is of degree 6"
+    		#print "curve is of degree 6"
 		return 6
 
 	elif (62.0000000000 < angle <= 85.0000000000):
-    		print "curve is of degree 5"
+    		#print "curve is of degree 5"
 		return 5
 
 	elif (85.0000000000 < angle <= 109.0000000000):
-    		print "curve is of degree 4"
+    		#print "curve is of degree 4"
 		return 4
 
 	elif (109.0000000000 < angle <= 133.0000000000):
-    		print "curve is of degree 3"
+    		#print "curve is of degree 3"
 		return 3
 	
 	elif (133.0000000000 < angle <= 157.0000000000):
-    		print "curve is of degree 2"
+    		#print "curve is of degree 2"
 		return 2
 
 	elif (157.0000000000 < angle <= 180.0000000000):
-    		print "curve is of degree 1"
+    		#print "curve is of degree 1"
 		return 1
 	else:
 		return 0

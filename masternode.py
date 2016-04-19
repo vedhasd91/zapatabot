@@ -22,13 +22,14 @@ BAUD=9600
 #---setup flags, variables and data structures
 NetworkInfo = {}
 DeviceList = list()
+nodes = list()
 rx_data=""
 execFlag = 0
 nodecount = 0
 DEBUG = 0
 accesslock = threading.Lock()
 readwritelock = threading.Lock()
-
+log=open('log_activity.txt','w')
 ser=Serial(PORT,BAUD)
 
 def msg_pack(data):
@@ -55,11 +56,13 @@ zb.at(command="ND")
 
 def plotwaypoints():
 	writehtml = open('plot_waypoints_gmaps.html','w')
+	node_num = 0
 	for key in NetworkInfo.keys():
-		nodes.append([NetworkInfo[key][0],NetworkInfo[key][2]])
-	
-	for node in nodes
-		message = """
+		plot_data = NetworkInfo[key][2].split(",")
+		nodes.append([NetworkInfo[key][0],plot_data[0],plot_data[1],node_num])
+		node_num+=1
+	print str(nodes)
+	message = """
 <!DOCTYPE html>
 	<html> 
 	<head> 
@@ -72,12 +75,10 @@ def plotwaypoints():
   		<div id="map" style="width: 1300px; height: 700px;"></div>
 
   		<script type="text/javascript">
-    				var locations = [""" + 
-      				node
-				+ """];
+    				var locations =""" + str(nodes) + """;
 
     				var map = new google.maps.Map(document.getElementById('map'), {
-      					zoom: 15,
+      					zoom: 17,
       					center: new google.maps.LatLng(35.308792, -80.741898),
       					mapTypeId: google.maps.MapTypeId.ROADMAP
     				});
@@ -106,8 +107,15 @@ def plotwaypoints():
 	writehtml.close()
 	filename = 'plot_waypoints_gmaps.html'
 	webbrowser.open(filename,new=0)
+	nodes[:] = []
 	return 0
 
+def nodehandler(name,delay,cmd):
+	while not execFlag:
+		time.sleep(delay)
+		print "Attempting node discovery..."
+		zb.at(command="ND")
+	return 0
 
 #---ZigBee Target Thread Function---
 def networkhandler(name, delay, cmd, nodecount):
@@ -142,8 +150,10 @@ def gpshandler(name,delay):
 				category = SlopeDistance.SlopeCategory(slope)
 				angle = CurveCalculator.CoordinatesToAngle(float(prev_loc_attr[0]),float(prev_loc_attr[1]),float(cur_loc_attr[0]),float(cur_loc_attr[1]))
 				anglecat = CurveCalculator.CurveCat(angle)
-				print  NetworkInfo[key][0] + " "+ str(dist) + " " + str(slope) + " " + str(category) + " " + str(angle) + " " + str(anglecat)
+				print  NetworkInfo[key][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat)
 				prev_loc_attr=cur_loc_attr
+				lg=NetworkInfo[key][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat)
+				log.write(lg)
 			else:
 				print NetworkInfo[key][0] + " is yet to be locked"
 			
@@ -153,15 +163,18 @@ if __name__ == "__main__":
 	print ">>>>>>>>>>MASTER NODE<<<<<<<<<<"
 	zig = threading.Thread(target=networkhandler,args=("ZTh",5,"LOC",nodecount))
 	gps = threading.Thread(target=gpshandler,args=("Gth",15))
+	nodis = threading.Thread(target=nodehandler,args=("NoTh",40,"ND"))
 	while 1:
 		#Infrastructure Software control prompt
 		uinput=raw_input(">>")
 		if uinput=='exit':
 			execFlag = 1
+			print "shutting down masternode.."
 			break
 		if uinput=='zigbee init':
 			zig.start()
 			gps.start()
+			nodis.start()
 		if uinput=='ls':
 			print NetworkInfo
 		if uinput=='plot':
@@ -169,8 +182,10 @@ if __name__ == "__main__":
 	if execFlag:
 		zig.join()
 		gps.join()
+		nodis.join()
 	ser.close()
-	print "goodbye... shutting down masternode.."
+	log.close()
+	print "goodbye..."
 
 
 
