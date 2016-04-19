@@ -140,7 +140,10 @@ def gpshandler(name,delay):
 		time.sleep(delay)
 		for key in NetworkInfo.keys():
 			readwritelock.acquire()
-			gpsdata = NetworkInfo[key][2]
+			if not NetworkInfo[key][2]:
+				print "..no data.."
+			else:
+				gpsdata = NetworkInfo[key][2]
 			#print "Slope Curve Dist thread:" + NetworkInfo[key][0] + gpsdata
 			readwritelock.release()
 			cur_loc_attr = gpsdata.split(',')
@@ -152,7 +155,7 @@ def gpshandler(name,delay):
 				anglecat = CurveCalculator.CurveCat(angle)
 				print  NetworkInfo[key][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat)
 				prev_loc_attr=cur_loc_attr
-				lg=NetworkInfo[key][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat)
+				lg=NetworkInfo[key][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat) + "\n"
 				log.write(lg)
 			else:
 				print NetworkInfo[key][0] + " is yet to be locked"
@@ -174,6 +177,7 @@ if __name__ == "__main__":
 		if uinput=='zigbee init':
 			zig.start()
 			gps.start()
+		if uinput == 'node init':	
 			nodis.start()
 		if uinput=='ls':
 			print NetworkInfo

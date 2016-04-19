@@ -39,7 +39,10 @@ def SlopeCalculator (altitude1, altitude2, distance):
 	run = math.sqrt(diff)
 	if run !=0:
 		slope = (rise/run) * 100
-		return slope
+		if altitude2>altitude1:
+			return (slope,'u')
+		else:
+			return (slope,'d')
 	
 	
 	
