@@ -69,7 +69,7 @@ def SlopeCategory(slope_val):
 		#print "slope is of type 4"
 		return 4
 
-	if(80.0000000000 < slope_val <= 10.0000000000):
+	if(80.0000000000 < slope_val <= 100.0000000000):
 		#print "slope is of type 5"
 		return 5
 	

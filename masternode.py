@@ -7,6 +7,7 @@ import SlopeDistance
 import CurveCalculator
 from xbee import ZigBee
 from serial import Serial
+from subprocess import call
 
 #MasterNode python script: Includes modules, networkhandler, gps handler, class handler, optimal algorithm
 #Authors: MasterNode/Network Handler: Vedhas Deshpande
@@ -112,8 +113,8 @@ def plotwaypoints():
 
 def nodehandler(name,delay,cmd):
 	while not execFlag:
-		time.sleep(delay)
 		print "Attempting node discovery..."
+		time.sleep(delay)
 		zb.at(command="ND")
 	return 0
 
@@ -138,12 +139,12 @@ def gpshandler(name,delay):
 	prev_loc_attr = ['35','-80','200']
 	while not execFlag:
 		time.sleep(delay)
-		for key in NetworkInfo.keys():
+		for device in DeviceList:
 			readwritelock.acquire()
-			if not NetworkInfo[key][2]:
+			if not NetworkInfo[str(device)][2]:
 				print "..no data.."
 			else:
-				gpsdata = NetworkInfo[key][2]
+				gpsdata = NetworkInfo[str(device)][2]
 			#print "Slope Curve Dist thread:" + NetworkInfo[key][0] + gpsdata
 			readwritelock.release()
 			cur_loc_attr = gpsdata.split(',')
@@ -153,12 +154,12 @@ def gpshandler(name,delay):
 				category = SlopeDistance.SlopeCategory(slope)
 				angle = CurveCalculator.CoordinatesToAngle(float(prev_loc_attr[0]),float(prev_loc_attr[1]),float(cur_loc_attr[0]),float(cur_loc_attr[1]))
 				anglecat = CurveCalculator.CurveCat(angle)
-				print  NetworkInfo[key][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat)
+				print  NetworkInfo[str(device)][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat)
 				prev_loc_attr=cur_loc_attr
-				lg=NetworkInfo[key][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat) + "\n"
+				lg=NetworkInfo[str(device)][0] + " D: "+ str(dist) + " S: " + str(slope) + " SC: " + str(category) + " A: " + str(angle) + " AC: " + str(anglecat) + "\n"
 				log.write(lg)
 			else:
-				print NetworkInfo[key][0] + " is yet to be locked"
+				print NetworkInfo[str(device)][0] + " is yet to be locked"
 			
 	return 0
 
@@ -166,7 +167,7 @@ if __name__ == "__main__":
 	print ">>>>>>>>>>MASTER NODE<<<<<<<<<<"
 	zig = threading.Thread(target=networkhandler,args=("ZTh",5,"LOC",nodecount))
 	gps = threading.Thread(target=gpshandler,args=("Gth",15))
-	nodis = threading.Thread(target=nodehandler,args=("NoTh",40,"ND"))
+	nodis = threading.Thread(target=nodehandler,args=("NoTh",20,"ND"))
 	while 1:
 		#Infrastructure Software control prompt
 		uinput=raw_input(">>")
@@ -188,6 +189,7 @@ if __name__ == "__main__":
 		gps.join()
 		nodis.join()
 	ser.close()
+	call(["cp" ,"log_activity.txt Log/recentlog.txt"])
 	log.close()
 	print "goodbye..."
 
