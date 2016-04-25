@@ -189,7 +189,6 @@ if __name__ == "__main__":
 		gps.join()
 		nodis.join()
 	ser.close()
-	call(["cp" ,"log_activity.txt Log/recentlog.txt"])
 	log.close()
 	print "goodbye..."
 
